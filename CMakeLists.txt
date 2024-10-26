@@ -1,21 +1,20 @@
 # Мінімальна версія CMake
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.10)
 
 # Назва проекту
-project(ClientApp)
+project(ClientServerProject)
 
-# Вказати стандарт C++
+# Встановлюємо стандарт C++
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Додати шлях до заголовків
-include_directories(include)
+include_directories(${CMAKE_SOURCE_DIR}/client/include)
 
-# Додати всі вихідні файли
-file(GLOB SOURCES "src/*.cpp")
 
 # Створення виконуваного файлу з вихідних файлів
-add_executable(ClientApp ${SOURCES})
+add_executable(client
+    ${CMAKE_SOURCE_DIR}/client/src/csad_lab2_sao.cpp
+    ${CMAKE_SOURCE_DIR}/client/src/serial_communication.cpp
+)
 
-# Якщо використовуються бібліотеки, можна додати їх тут
-# Наприклад: target_link_libraries(ClientApp serial)
+

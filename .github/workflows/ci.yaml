@@ -27,18 +27,15 @@ jobs:
       - name: Download platform Arduino AVR
         run: arduino-cli core install arduino:avr
 
-      - name: Configure CMake
-        run: cmake -S client -B build
+      - name: Config CMake
+        run: cmake -S . -B build
         shell: cmd
 
       - name: Build with CMake
         run: cmake --build build
         shell: cmd
-
-      - name: Compile Arduino Sketch
-        run: arduino-cli compile --fqbn arduino:avr:nano server/server.ino
-
-      - name: Upload build artifacts
+      
+      - name: Download build artefacts
         uses: actions/upload-artifact@v3
         with:
           name: build-artifacts
