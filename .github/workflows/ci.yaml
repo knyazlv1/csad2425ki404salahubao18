@@ -22,20 +22,24 @@ jobs:
           version: '0.19.2'
 
       - name: Download CMake
-        run: choco install cmake
+        run: choco install cmake -y
+
+      - name: Install Boost
+        run: choco install boost-msvc-14.2 -y
+        shell: cmd
 
       - name: Download platform Arduino AVR
         run: arduino-cli core install arduino:avr
 
       - name: Config CMake
-        run: cmake -S . -B build
+        run: cmake -S . -B build -DBOOST_ROOT="D:/Programs/boost_1_86_0" -DBOOST_INCLUDEDIR="D:/Programs/boost_1_86_0/boost" -DBOOST_LIBRARYDIR="D:/Programs/boost_1_86_0/lib64-msvc-14.3"
         shell: cmd
 
       - name: Build with CMake
         run: cmake --build build
         shell: cmd
       
-      - name: Download build artefacts
+      - name: Upload build artifacts
         uses: actions/upload-artifact@v3
         with:
           name: build-artifacts
