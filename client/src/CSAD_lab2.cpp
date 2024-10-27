@@ -18,6 +18,9 @@ int main() {
     if (!response.empty()) {
         std::cout << "Response from Arduino: " << response << std::endl;
     }
+    std::cout << "Press Enter to continue..." << std::endl;
+    std::cin.get();  // Затримує програму до натискання Enter
+    return 0;
 
     return 0;
 }
