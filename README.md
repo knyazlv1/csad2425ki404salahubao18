@@ -45,7 +45,7 @@ Main development branch: **develop**
 
 For the upcoming tasks, the following languages, and hardware will be used:
 
-- **Programming Language**: C/C++ or Java (Will clarify it in the next Pull Requests)
+- **Programming Language**: C/C++ 
 - **Hardware**: Arduino Nano 
 
 ## Task2 Details
