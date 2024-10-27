@@ -1,18 +1,11 @@
 #include "SerialPort.h"
 #include <iostream>
-#include <locale>
-#include <codecvt>
 
-// Функція для конвертації std::wstring у std::string
-std::string wstringToString(const std::wstring& wstr) {
-    std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
-    return converter.to_bytes(wstr);
-}
-
-SerialPort::SerialPort(const std::wstring& portName) {
-    serialHandle = CreateFile(portName.c_str(), GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+SerialPort::SerialPort(const std::string& portName) {
+    // Використовуємо CreateFileA для роботи зі std::string
+    serialHandle = CreateFileA(portName.c_str(), GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
     if (serialHandle == INVALID_HANDLE_VALUE) {
-        std::cerr << "Unable to open port: " << wstringToString(portName) << std::endl;
+        std::cerr << "Unable to open port: " << portName << std::endl;
     }
 }
 

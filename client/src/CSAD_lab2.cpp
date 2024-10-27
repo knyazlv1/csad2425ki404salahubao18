@@ -2,7 +2,7 @@
 #include "SerialPort.h"
 
 int main() {
-    SerialPort serialPort(L"\\\\.\\COM3");
+    SerialPort serialPort("\\\\.\\COM3");
 
     if (!serialPort.configurePort()) {
         return 1;
