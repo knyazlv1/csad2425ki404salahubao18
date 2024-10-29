@@ -6,7 +6,7 @@ In this case, the repository name would be structured as: `csad2425ki404salahuba
 
 Main development branch: **develop**
 
-## Task Details
+## Task1 Details
 
 1. Create a GitHub repository with the name `csad2425ki404salahubao18`, where:
    - **YY1** is the start of the studying year: **24**
@@ -45,5 +45,14 @@ Main development branch: **develop**
 
 For the upcoming tasks, the following languages, and hardware will be used:
 
-- **Programming Language**: C/C++ or Java (Will clarify it in the next Pull Requests)
+- **Programming Language**: C/C++ 
 - **Hardware**: Arduino Nano 
+
+## Task2 Details
+
+- Create a simple communication schema SW(client) <-> UART <-> HW(server).
+- The client should send a message to the server. The server should modify the message and send it back to the client.
+- Create YML file with next features:
+ a. build all binaries (create scripts in folder ci/ if need);
+ b. run tests; 
+ c. create artifacts with binaries and test reports;
