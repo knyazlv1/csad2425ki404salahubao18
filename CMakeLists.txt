@@ -13,8 +13,9 @@ include_directories(${CMAKE_SOURCE_DIR}/client/include)
 
 # add an executable file for the client
 add_executable(client
-    ${CMAKE_SOURCE_DIR}/client/src/CSAD_lab2.cpp
-    ${CMAKE_SOURCE_DIR}/client/src/SerialPort.cpp
+    ${CMAKE_SOURCE_DIR}/client/src/main.cpp
+    ${CMAKE_SOURCE_DIR}/client/src/serialport.cpp
+    ${CMAKE_SOURCE_DIR}/client/src/game.cpp
 )
 
 # specify that the Windows library should be used

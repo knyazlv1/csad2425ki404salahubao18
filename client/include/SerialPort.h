@@ -1,6 +1,6 @@
 #pragma once
-#ifndef SERIALPORT_H
-#define SERIALPORT_H
+#ifndef SERIAL_H
+#define SERIAL_H
 
 #include <windows.h>
 #include <string>
@@ -11,7 +11,8 @@ public:
     ~SerialPort();
 
     bool configurePort();
-    std::string sendMessage(const std::string& message);
+    bool sendMessage(const std::string& message);
+    std::string receiveMessage();
 
 private:
     HANDLE serialHandle;
@@ -20,4 +21,4 @@ private:
     bool setPortTimeouts();
 };
 
-#endif // SERIALPORT_H
+#endif // SERIAL_H
