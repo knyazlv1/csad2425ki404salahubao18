@@ -56,3 +56,16 @@ For the upcoming tasks, the following languages, and hardware will be used:
  a. build all binaries (create scripts in folder ci/ if need);
  b. run tests; 
  c. create artifacts with binaries and test reports;
+
+## Task3 Details
+   Develop Server and Client.
+Play modes:
+   - Man vs Man
+   - Man vs AI (random)
+   - Man vs AI (win strategy)
+   - AI (random) vs AI (win strategy)
+Action:
+   - New game
+   - Load game
+   - Save game
+
