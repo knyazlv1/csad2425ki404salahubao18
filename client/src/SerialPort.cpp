@@ -1,6 +1,17 @@
+
+
+/**
+ * @file serialport.cpp
+ * @brief Implements the SerialPort class for managing serial port communication.
+ */
 #include "serialport.h"
 #include <iostream>
 
+ /**
+  * @brief Constructor for the SerialPort class. Attempts to open the specified serial port.
+  *
+  * @param portName The name of the port to open (e.g., "COM3").
+  */
 SerialPort::SerialPort(const std::string& portName) {
     serialHandle = CreateFileA(portName.c_str(), GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
     if (serialHandle == INVALID_HANDLE_VALUE) {
@@ -8,12 +19,20 @@ SerialPort::SerialPort(const std::string& portName) {
     }
 }
 
+/**
+ * @brief Destructor for the SerialPort class. Closes the port if it is open.
+ */
 SerialPort::~SerialPort() {
     if (serialHandle != INVALID_HANDLE_VALUE) {
         CloseHandle(serialHandle);
     }
 }
 
+/**
+ * @brief Configures the serial port by setting state and timeouts.
+ *
+ * @return true if the configuration succeeds; false otherwise.
+ */
 bool SerialPort::configurePort() {
     if (!setPortState()) {
         std::cerr << "Error: Unable to configure port state." << std::endl;
@@ -26,6 +45,11 @@ bool SerialPort::configurePort() {
     return true;
 }
 
+/**
+ * @brief Sets the state of the serial port, such as baud rate and byte size.
+ *
+ * @return true if the port state is successfully set; false otherwise.
+ */
 bool SerialPort::setPortState() {
     DCB dcbSerialParams = { 0 };
     dcbSerialParams.DCBlength = sizeof(dcbSerialParams);
@@ -47,6 +71,11 @@ bool SerialPort::setPortState() {
     return true;
 }
 
+/**
+ * @brief Sets timeouts for the serial port to manage read and write operations.
+ *
+ * @return true if the timeouts are successfully set; false otherwise.
+ */
 bool SerialPort::setPortTimeouts() {
     COMMTIMEOUTS timeouts = { 0 };
     timeouts.ReadIntervalTimeout = 50;
@@ -62,6 +91,12 @@ bool SerialPort::setPortTimeouts() {
     return true;
 }
 
+/**
+ * @brief Sends a message through the serial port.
+ *
+ * @param message The message to send.
+ * @return true if the message was sent successfully; false otherwise.
+ */
 bool SerialPort::sendMessage(const std::string& message) {
     DWORD bytesWritten;
     if (!WriteFile(serialHandle, message.c_str(), message.size(), &bytesWritten, NULL) || bytesWritten != message.size()) {
@@ -71,6 +106,11 @@ bool SerialPort::sendMessage(const std::string& message) {
     return true;
 }
 
+/**
+ * @brief Receives a message from the serial port.
+ *
+ * @return std::string The received message.
+ */
 std::string SerialPort::receiveMessage() {
     char buffer[1024];
     DWORD bytesRead;
