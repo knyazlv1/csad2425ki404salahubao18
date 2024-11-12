@@ -1,0 +1,30 @@
+# Doxyfile configuration for generating documentation for the project
+# Doxygen version: 1.9.1 or compatible
+
+# Project information
+PROJECT_NAME           = "CSAD Rock-Paper-Scissors"
+PROJECT_NUMBER         = "1.0"
+PROJECT_BRIEF          = "Client-Server Game Documentation"
+OUTPUT_DIRECTORY       = ./docs
+
+# Source and input settings
+INPUT                  = ./client/src ./client/include ./server
+INPUT_ENCODING         = UTF-8
+FILE_PATTERNS          = *.cpp *.h *.ino
+RECURSIVE              = YES
+
+# Build settings
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+
+EXTENSION_MAPPING      = ino=C++
+
+# Output formats
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+GENERATE_MAN           = NO
+GENERATE_XML           = NO
+
+# Doxygen layout
+GENERATE_TREEVIEW      = YES
