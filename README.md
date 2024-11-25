@@ -74,3 +74,6 @@ Action:
 	- Add doxygen comments for all public functions, classes, properties, fields...
 	- Generate documentation based on doxygen comments
 	- Required steps
+
+## Task5 Details
+    - Implement tests
