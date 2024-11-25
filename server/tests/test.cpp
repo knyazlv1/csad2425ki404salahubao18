@@ -1,11 +1,10 @@
 #include "pch.h"
 #include <gtest/gtest.h>
 #include "server.h"
-#include <iostream>
-#include <string>
+#include <gtest/gtest.h>
 #include <cstdlib>
 
-// Тест функції getMoveFromString
+
 TEST(ServerTest, GetMoveFromString_ValidMoves) {
     EXPECT_EQ(getMoveFromString("rock"), "rock");
     EXPECT_EQ(getMoveFromString("paper"), "paper");
@@ -16,7 +15,7 @@ TEST(ServerTest, GetMoveFromString_InvalidMove) {
     EXPECT_EQ(getMoveFromString("invalid"), "rock");
 }
 
-// Тест функції determineWinner
+
 TEST(ServerTest, DetermineWinner_Draw) {
     EXPECT_EQ(determineWinner("rock", "rock"), "Draw");
     EXPECT_EQ(determineWinner("paper", "paper"), "Draw");
@@ -35,7 +34,7 @@ TEST(ServerTest, DetermineWinner_Player2Wins) {
     EXPECT_EQ(determineWinner("scissors", "rock"), "Player2 Wins");
 }
 
-// Тест функції getRandomMove
+
 TEST(ServerTest, GetRandomMove_ReturnsValidMove) {
     for (int i = 0; i < 100; ++i) {
         std::string move = getRandomMove();
@@ -43,14 +42,14 @@ TEST(ServerTest, GetRandomMove_ReturnsValidMove) {
     }
 }
 
-// Тест функції getStrategicMove
+
 TEST(ServerTest, GetStrategicMove_CountersOpponent) {
     EXPECT_EQ(getStrategicMove("rock"), "paper");
     EXPECT_EQ(getStrategicMove("paper"), "scissors");
     EXPECT_EQ(getStrategicMove("scissors"), "rock");
 }
 
-// Тест функції getAIStrategyMove
+
 TEST(ServerTest, GetAIStrategyMove_FirstRoundRandom) {
     lastPlayerMove = "";
     std::string move = getAIStrategyMove("rock");
@@ -64,14 +63,14 @@ TEST(ServerTest, GetAIStrategyMove_SubsequentRoundsStrategic) {
     EXPECT_EQ(lastPlayerMove, "paper");
 }
 
-// Тест функції playManVsMan
+
 TEST(ServerTest, PlayManVsMan_ResultCorrect) {
     EXPECT_EQ(playManVsMan("rock", "scissors"), "Player1 Wins");
     EXPECT_EQ(playManVsMan("rock", "rock"), "Draw");
     EXPECT_EQ(playManVsMan("scissors", "rock"), "Player2 Wins");
 }
 
-// Тест функції playManVsAIRandom
+
 TEST(ServerTest, PlayManVsAIRandom_ResultContainsAI) {
     std::string result = playManVsAIRandom("rock");
     std::size_t pos = result.find("\n");
@@ -80,7 +79,7 @@ TEST(ServerTest, PlayManVsAIRandom_ResultContainsAI) {
     EXPECT_TRUE(aiMove == "rock" || aiMove == "paper" || aiMove == "scissors");
 }
 
-// Тест функції playManVsAIStrategy
+
 TEST(ServerTest, PlayManVsAIStrategy_ResultContainsAI) {
     lastPlayerMove = "";
     std::string result = playManVsAIStrategy("rock");
@@ -90,7 +89,7 @@ TEST(ServerTest, PlayManVsAIStrategy_ResultContainsAI) {
     EXPECT_TRUE(aiMove == "rock" || aiMove == "paper" || aiMove == "scissors");
 }
 
-// Тест функції playAIRandomVsAIStrategy
+
 TEST(ServerTest, PlayAIRandomVsAIStrategy_ValidResult) {
     std::string result = playAIRandomVsAIStrategy();
     std::size_t firstPos = result.find("\n");

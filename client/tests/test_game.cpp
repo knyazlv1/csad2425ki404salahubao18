@@ -9,9 +9,9 @@
 #include <string>
 #include <sstream>
 
-// Тест для функції saveGameState
+
 TEST(GameTests, SaveGameState) {
-    // Задаємо вихідні параметри
+  
     std::string filename = "test_game.ini";
     std::string mode = "Man vs Man";
     std::string player1Move = "rock";
@@ -19,10 +19,10 @@ TEST(GameTests, SaveGameState) {
     int player1Score = 1;
     int player2Score = 0;
 
-    // Викликаємо функцію збереження
+    
     saveGameState(filename, mode, player1Move, player2Move, player1Score, player2Score);
 
-    // Перевіряємо, чи файл був створений і має вірний вміст
+    
     std::ifstream inFile(filename);
     ASSERT_TRUE(inFile.is_open());
 
@@ -43,12 +43,12 @@ TEST(GameTests, SaveGameState) {
     ASSERT_EQ(std::stoi(line), player2Score);
 
     inFile.close();
-    std::remove(filename.c_str());  // Видаляємо тестовий файл після перевірки
+    std::remove(filename.c_str());  
 }
 
-// Тест для функції loadGameState
+
 TEST(GameTests, LoadGameState) {
-    // Створюємо тестовий файл для завантаження
+    
     std::string filename = "test_game.ini";
     std::ofstream outFile(filename);
     outFile << "Man vs Man\n";
@@ -61,10 +61,10 @@ TEST(GameTests, LoadGameState) {
     std::string mode, player1Move, player2Move;
     int player1Score, player2Score;
 
-    // Викликаємо функцію завантаження
+    
     bool result = loadGameState(filename, mode, player1Move, player2Move, player1Score, player2Score);
 
-    // Перевіряємо, що завантаження відбулося успішно
+    
     ASSERT_TRUE(result);
     ASSERT_EQ(mode, "Man vs Man");
     ASSERT_EQ(player1Move, "rock");
@@ -72,7 +72,7 @@ TEST(GameTests, LoadGameState) {
     ASSERT_EQ(player1Score, 1);
     ASSERT_EQ(player2Score, 0);
 
-    std::remove(filename.c_str());  // Видаляємо тестовий файл після перевірки
+    std::remove(filename.c_str());  
 }
 
 void playGame(std::string mode, std::string playerMove1, std::string playerMove2, int& player1Score, int& player2Score) {
@@ -87,7 +87,7 @@ void playGame(std::string mode, std::string playerMove1, std::string playerMove2
             player1Score++;
         }
         else if (playerMove1 == playerMove2) {
-            // Нічия
+          
         }
         else {
             player2Score++;
@@ -111,7 +111,7 @@ void playGame(std::string mode, std::string playerMove1, std::string playerMove2
         }
     }
 
-    // Збереження результатів у файл
+    
     std::ofstream outFile("game.ini");
     outFile << mode << "\n" << playerMove1 << "\n" << playerMove2 << "\n";
     outFile << player1Score << "\n" << player2Score << "\n";
@@ -119,21 +119,21 @@ void playGame(std::string mode, std::string playerMove1, std::string playerMove2
 }
 
 
-// Тест для функції playGame
+
 TEST(GameTests, PlayGame_ManVsMan) {
     std::string mode = "Man vs Man";
     std::string player1Move = "rock";
     std::string player2Move = "scissors";
     int player1Score = 0, player2Score = 0;
 
-    // Викликаємо playGame з параметрами
+    
     playGame(mode, player1Move, player2Move, player1Score, player2Score);
 
-    // Перевірка результату гри
+    
     std::ifstream inFile("game.ini");
     std::string line;
 
-    // Перевірка значень в файлі
+   
     std::getline(inFile, line);
     ASSERT_EQ(line, mode);
 
@@ -144,65 +144,65 @@ TEST(GameTests, PlayGame_ManVsMan) {
     ASSERT_EQ(line, player2Move);
 
     std::getline(inFile, line);
-    ASSERT_EQ(std::stoi(line), 1);  // Player 1 виграв
+    ASSERT_EQ(std::stoi(line), 1);  
 
     std::getline(inFile, line);
-    ASSERT_EQ(std::stoi(line), 0);  // Player 2 програв
+    ASSERT_EQ(std::stoi(line), 0);  
 
     inFile.close();
-    std::remove("game.ini");  // Видаляємо тестовий файл
+    std::remove("game.ini");  
 }
 
-// Тест для "Man vs AI"
+
 TEST(GameTests, PlayGame_ManVsAI) {
     std::string mode = "Man vs AI (Random)";
-    std::string playerMove1 = "rock";     // Хід людини
-    std::string playerMove2 = "paper";    // Хід AI (AI виграє)
+    std::string playerMove1 = "rock";     
+    std::string playerMove2 = "paper";    
     int player1Score = 0, player2Score = 0;
 
-    // Викликаємо playGame з параметрами
+    
     playGame(mode, playerMove1, playerMove2, player1Score, player2Score);
 
-    // Перевірка результату гри
+    
     std::ifstream inFile("game.ini");
     std::string line;
 
-    // Перевірка значень в файлі
+    
     std::getline(inFile, line);
-    ASSERT_EQ(line, mode);  // Перевірка правильного режиму гри
+    ASSERT_EQ(line, mode); 
 
     std::getline(inFile, line);
-    ASSERT_EQ(line, playerMove1);  // Перевірка ходу людини
+    ASSERT_EQ(line, playerMove1);  
 
     std::getline(inFile, line);
-    ASSERT_EQ(line, playerMove2);  // Перевірка ходу AI
+    ASSERT_EQ(line, playerMove2);  
 
     std::getline(inFile, line);
-    ASSERT_EQ(std::stoi(line), 0);  // Гравець програв
+    ASSERT_EQ(std::stoi(line), 0);  
 
     std::getline(inFile, line);
-    ASSERT_EQ(std::stoi(line), 1);  // AI виграв
+    ASSERT_EQ(std::stoi(line), 1);  
 
     inFile.close();
-    std::remove("game.ini");  // Видаляємо тестовий файл
+    std::remove("game.ini");  
 }
 
-// Тест для виходу з гри
+
 TEST(GameTests, PlayGame_Exit) {
     std::string mode = "Exit";
     int playerScore = 0, aiScore = 0;
 
-    // Викликаємо playGame з параметрами для виходу
+    
     playGame(mode, "", "", playerScore, aiScore);
 
-    // Перевірка значень в файлі
+    
     std::ifstream inFile("game.ini");
     std::string line;
     std::getline(inFile, line);
-    ASSERT_EQ(line, mode);  // Перевірка виходу
+    ASSERT_EQ(line, mode);  
 
     inFile.close();
-    std::remove("game.ini");  // Видаляємо тестовий файл
+    std::remove("game.ini");  
 }
 
 std::string mockGetUserChoice() {
